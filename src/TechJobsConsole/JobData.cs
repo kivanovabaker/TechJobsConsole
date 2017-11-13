@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -49,7 +50,7 @@ namespace TechJobsConsole
             {
                 string aValue = row[column];
 
-                if (aValue.Contains(value))
+                if (aValue.CaseInsensitiveContains(value))
                 {
                     jobs.Add(row);
                 }
@@ -70,7 +71,7 @@ namespace TechJobsConsole
 
                 foreach (string jobValue in jobValues)
                 {
-                    if (jobValue.Contains(value))
+                    if (jobValue.CaseInsensitiveContains(value))
                     {
                         jobs.Add(jobKVP);
                         break;
@@ -79,6 +80,7 @@ namespace TechJobsConsole
             }
             return jobs;
         }
+
         /*
          * Load and parse data from job_data.csv
          */
@@ -159,5 +161,14 @@ namespace TechJobsConsole
 
             return rowValues.ToArray();
         }
+    }
+}
+
+public static class Extensions
+{
+    public static bool CaseInsensitiveContains(this string text, string value,
+        StringComparison stringComparison = StringComparison.CurrentCultureIgnoreCase)
+    {
+        return text.IndexOf(value, stringComparison) >= 0;
     }
 }
