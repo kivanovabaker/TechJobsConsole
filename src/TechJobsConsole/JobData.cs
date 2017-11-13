@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace TechJobsConsole
@@ -13,7 +15,8 @@ namespace TechJobsConsole
         public static List<Dictionary<string, string>> FindAll()
         {
             LoadData();
-            return AllJobs;
+            List<Dictionary<string, string>> AllJobsCopy = AllJobs.ToList();
+            return AllJobsCopy;
         }
 
         /*
